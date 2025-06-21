@@ -32,34 +32,6 @@ A complete admin panel with role-based authentication, built with Next.js (front
 - Multer for file uploads
 - CSV parser for bulk imports
 
-## Project Structure
-
-### Frontend
-```
-admin-panel-frontend/
-├── src/
-│   ├── app/ - Next.js app router pages
-│   ├── components/ - Reusable UI components
-│   ├── context/ - Auth context provider
-│   ├── utils/ - API utilities
-│   └── types/ - TypeScript interfaces
-├── public/ - Static assets
-└── package.json
-```
-
-### Backend
-```
-admin-panel-backend/
-├── src/
-│   ├── controllers/ - Route handlers
-│   ├── models/ - MongoDB schemas
-│   ├── routes/ - API endpoints
-│   ├── middleware/ - Auth and role check
-│   └── utils/ - Database connection
-├── uploads/ - CSV upload directory
-└── package.json
-```
-
 ## Setup Instructions
 
 ### Prerequisites

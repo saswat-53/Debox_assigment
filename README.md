@@ -1,110 +1,167 @@
-Admin Panel - Full Stack Application
-(React + Node.js + MongoDB)
+```markdown
+# Debox Assignment - Admin Panel
 
-📌 Overview
-A role-based admin dashboard with:
+A complete admin panel with role-based authentication, built with Next.js (frontend) and Node.js/Express (backend).
 
-Frontend: React.js (TypeScript), Material-UI
+## Features
 
-Backend: Node.js, Express, MongoDB (Mongoose)
+- **Role-based access control** (Master & Admin roles)
+- **JWT authentication** with secure cookie storage
+- **Dashboard** with statistics and quick actions
+- **CRUD operations** for Products, Categories, and Inventory
+- **CSV bulk upload** functionality (Master only)
+- **Responsive design** with Tailwind CSS
+- **TypeScript** for type safety
+- **MongoDB** database
 
-Features:
+## Tech Stack
 
-JWT authentication (Master/Admin roles)
+### Frontend
+- Next.js 14
+- React 18
+- TypeScript
+- Tailwind CSS
+- Axios for API calls
+- Context API for state management
 
-Product, Category, and Inventory management
+### Backend
+- Node.js
+- Express.js
+- MongoDB (Mongoose ODM)
+- JWT for authentication
+- Multer for file uploads
+- CSV parser for bulk imports
 
-CSV bulk data import
+## Project Structure
 
-Responsive UI
-
-🚀 Quick Start
-Prerequisites
-Node.js (v18+)
-
-MongoDB Atlas URI (or local MongoDB)
-
-1. Clone & Setup
-bash
-git clone https://github.com/saswat-53/Debox_assigment.git
-cd Debox_assigment
-2. Backend Setup
-bash
-cd backend
-npm install
-cp .env.example .env  # Fill in your MongoDB URI and JWT secret
-npm run dev           # Runs on http://localhost:5000
-3. Frontend Setup
-bash
-cd ../frontend
-npm install
-npm start             # Runs on http://localhost:3000
-🌐 Environment Variables
-Backend (.env)
-env
-PORT=5000
-MONGODB_URI=mongodb+srv://<user>:<password>@cluster.mongodb.net/adminpanel
-JWT_SECRET=your_secure_jwt_secret
-NODE_ENV=development
-Frontend (.env)
-env
-REACT_APP_API_URL=http://localhost:5000  # Must match backend URL
-📂 Project Structure
-Backend
-text
-backend/
+### Frontend
+```
+admin-panel-frontend/
 ├── src/
-│   ├── controllers/   # Product, Auth, CSV controllers
-│   ├── models/        # MongoDB schemas (User, Product, etc.)
-│   ├── routes/        # API endpoints
-│   ├── middleware/    # Auth & role checks
-│   └── server.ts      # Express server
-├── uploads/           # CSV uploads (auto-created)
-└── sample-data.csv    # Sample import data
-Frontend
-text
-frontend/
-├── src/
-│   ├── components/    # Reusable UI (Tables, Forms, etc.)
-│   ├── pages/         # Routes (Login, Dashboard)
-│   ├── services/      # API calls (axios/fetch)
-│   ├── App.tsx        # Main app router
-│   └── index.tsx      # Entry point
-├── public/            # Static assets
+│   ├── app/ - Next.js app router pages
+│   ├── components/ - Reusable UI components
+│   ├── context/ - Auth context provider
+│   ├── utils/ - API utilities
+│   └── types/ - TypeScript interfaces
+├── public/ - Static assets
 └── package.json
-🔐 Authentication
-Master Role: Full CRUD access
+```
 
-Admin Role: Read-only access
+### Backend
+```
+admin-panel-backend/
+├── src/
+│   ├── controllers/ - Route handlers
+│   ├── models/ - MongoDB schemas
+│   ├── routes/ - API endpoints
+│   ├── middleware/ - Auth and role check
+│   └── utils/ - Database connection
+├── uploads/ - CSV upload directory
+└── package.json
+```
 
-Default Test Credentials:
+## Setup Instructions
 
-text
-Email: master@example.com  
-Password: password123
-⚙️ Key API Endpoints
-Endpoint	Method	Description	Access
-/api/auth/login	POST	Login with JWT token	Public
-/api/products	GET	List all products	Admin+Master
-/api/csv/upload	POST	Bulk upload via CSV	Master only
-🛠️ Development Scripts
-Backend
-bash
-npm run dev    # Start dev server
-npm run build  # Compile to dist/
-npm start      # Run production build
-Frontend
-bash
-npm start    # Start React dev server
-npm build    # Create production build
-🚀 Deployment
-Backend:
+### Prerequisites
+- Node.js (v18+)
+- MongoDB Atlas account or local MongoDB instance
+- Git
 
-Set NODE_ENV=production in .env.
+### Frontend Setup
+1. Clone the repository
+2. Navigate to frontend directory: `cd admin-panel-frontend`
+3. Install dependencies: `npm install`
+4. Create `.env.local` file from `.env.local.example`
+5. Start development server: `npm run dev`
 
-Deploy with npm start (or PM2).
+### Backend Setup
+1. Navigate to backend directory: `cd admin-panel-backend`
+2. Install dependencies: `npm install`
+3. Create `.env` file from `.env.example` and configure MongoDB URI
+4. Start development server: `npm run dev`
 
-Frontend:
+## Environment Variables
 
-Run npm run build and deploy the build/ folder.
+### Frontend (.env.local)
+```env
+NEXT_PUBLIC_API_URL=http://localhost:5000/api
+```
 
+### Backend (.env)
+```env
+PORT=5000
+MONGODB_URI=mongodb+srv://username:password@cluster.mongodb.net/adminpanel
+JWT_SECRET=your-secret-key
+NODE_ENV=development
+```
+
+## API Endpoints
+
+### Authentication
+- `POST /api/auth/login` - User login
+- `POST /api/auth/register` - User registration
+
+### Products
+- `GET /api/products` - Get all products
+- `POST /api/products` - Create product (Master only)
+- `PUT /api/products/:id` - Update product (Master only)
+- `DELETE /api/products/:id` - Delete product (Master only)
+
+### Categories
+- `GET /api/categories` - Get all categories
+- `POST /api/categories` - Create category (Master only)
+- `PUT /api/categories/:id` - Update category (Master only)
+- `DELETE /api/categories/:id` - Delete category (Master only)
+
+### Inventory
+- `GET /api/inventory` - Get all inventory
+- `POST /api/inventory` - Create inventory (Master only)
+- `PUT /api/inventory/:id` - Update inventory (Master only)
+- `DELETE /api/inventory/:id` - Delete inventory (Master only)
+
+### CSV Upload (Master only)
+- `POST /api/csv/upload` - Upload CSV file
+
+## Demo Credentials
+
+The login page includes demo accounts:
+- **Master**: master@example.com / password (Full access)
+- **Admin**: admin@example.com / password (Read-only access)
+
+## Available Scripts
+
+### Frontend
+- `npm run dev` - Start development server
+- `npm run build` - Build for production
+- `npm start` - Start production server
+- `npm run lint` - Run ESLint
+
+### Backend
+- `npm run dev` - Start development server with nodemon
+- `npm run build` - Build TypeScript to JavaScript
+- `npm start` - Start production server
+
+## Deployment
+
+### Frontend
+1. Build the project: `npm run build`
+2. Deploy the `out` directory to your hosting provider (Vercel recommended)
+
+### Backend
+1. Set environment variables in production
+2. Build the project: `npm run build`
+3. Start the server: `npm start`
+4. Use PM2 or similar process manager for production
+
+## Contributing
+
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add some amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+## License
+
+ISC License - see [LICENSE](LICENSE) file for details
+```
